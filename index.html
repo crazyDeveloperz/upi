@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="assets/logo.svg" type="image/x-icon" />
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <title>Donate inulute@boi</title>
+    <title>Payment Crazy Developer</title>
     <style>
         /* Add styles for the loading spinner */
         .spinner {
@@ -45,7 +45,7 @@
             <div class="payment-info">
                 <p id="qr-text">Scan the QR code or use the following method</p>
                 <div class="upi-id-content">
-                    <strong id="payment-id">inulute@boi</strong>
+                    <strong id="payment-id">crazydeveloperr@ybl</strong>
                     <button id="payment-button" class="copy-button">Copy</button>
                     <lottie-player 
                         id="upi-animation"
@@ -60,63 +60,14 @@
                     ></lottie-player>
                 </div>
             </div>
-            <!-- Toggle between UPI and PayPal -->
-            <a id="toggle-link" href="#" class="toggle-payment">Donate via PayPal? Click Here</a>
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const toggleLink = document.getElementById("toggle-link");
             const qrImage = document.getElementById("qr-image");
             const paymentId = document.getElementById("payment-id");
             const paymentButton = document.getElementById("payment-button");
-            const upiAnimation = document.getElementById("upi-animation");
-            const qrText = document.getElementById("qr-text");
-            const loadingContainer = document.querySelector(".loading-container");
-
-            let isUpi = true;
-
-            // Function to switch to PayPal
-            function switchToPayPal() {
-                loadingContainer.style.display = "block"; // Show loading spinner
-                qrImage.style.display = "none"; // Hide QR image
-
-                qrImage.onload = function() {
-                    loadingContainer.style.display = "none"; // Hide loading spinner
-                    qrImage.style.display = "block"; // Show QR image
-                };
-
-                qrImage.src = "assets/paypal_qr.png"; // Replace with your PayPal QR code image
-                paymentId.textContent = "inulute"; // Replace with your PayPal ID
-                paymentButton.textContent = "Open PayPal";
-                paymentButton.removeEventListener("click", copyUpiId);
-                paymentButton.addEventListener("click", openPayPalLink);
-                toggleLink.textContent = "Donate via UPI? Click Here";
-                upiAnimation.style.display = "none";
-                qrText.textContent = "Scan with any QR scanning app or use the button";
-                isUpi = false;
-            }
-
-            // Function to switch to UPI
-            function switchToUpi() {
-                qrImage.style.display = "none"; // Hide QR image
-                loadingContainer.style.display = "none"; // Hide loading spinner
-
-                qrImage.onload = function() {
-                    qrImage.style.display = "block"; // Show QR image
-                };
-
-                qrImage.src = "assets/qr-code.png"; // Replace with your UPI QR code image
-                paymentId.textContent = "inulute@boi"; // Replace with your UPI ID
-                paymentButton.textContent = "Copy";
-                paymentButton.removeEventListener("click", openPayPalLink);
-                paymentButton.addEventListener("click", copyUpiId);
-                toggleLink.textContent = "Donate via PayPal? Click Here";
-                upiAnimation.style.display = "block";
-                qrText.textContent = "Scan the QR code or use the following method";
-                isUpi = true;
-            }
 
             // Function to copy UPI ID
             function copyUpiId() {
@@ -132,22 +83,7 @@
                 }, 2500);
             }
 
-            // Function to open PayPal link
-            function openPayPalLink() {
-                window.open("https://www.paypal.com/paypalme/inulute", "_blank");
-            }
-
-            // Toggle between UPI and PayPal when the link is clicked
-            toggleLink.addEventListener("click", function (e) {
-                e.preventDefault();
-                if (isUpi) {
-                    switchToPayPal();
-                } else {
-                    switchToUpi();
-                }
-            });
-
-            // Add the copy functionality for UPI by default
+            // Add the copy functionality for UPI
             paymentButton.addEventListener("click", copyUpiId);
 
             document.addEventListener("contextmenu", function (event) {
