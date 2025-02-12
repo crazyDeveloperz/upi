@@ -8,15 +8,15 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <title>Payment Crazy Developer</title>
     <style>
-        /* Add styles for the loading spinner */
+        /* Loading spinner */
         .spinner {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #3498db; /* Blue */
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
             border-radius: 50%;
             width: 30px;
             height: 30px;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
+            margin: 10px auto;
         }
 
         @keyframes spin {
@@ -25,9 +25,31 @@
         }
         
         .loading-container {
-            display: none;
             text-align: center;
             margin: 20px 0;
+        }
+
+        .qr-container {
+            text-align: center;
+        }
+
+        .qr-code img {
+            display: block;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .copy-button {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .copy-button:active {
+            background: #2980b9;
         }
     </style>
 </head>
@@ -35,17 +57,17 @@
     <div class="container">
         <!-- QR Section -->
         <div class="qr-container">
-            <div class="loading-container">
+            <div class="loading-container" id="loading">
                 <div class="spinner"></div>
-                <p>Loading...</p>
+                <p>Loading QR Code...</p>
             </div>
             <div class="qr-code"> 
-                <img id="qr-image" src="https://envs.sh/mjw.jpg" alt="UPI QR Code">
+                <img id="qr-image" src="https://envs.sh/Vt.jpg" alt="UPI QR Code" onload="hideLoading()" onerror="qrLoadError()">
             </div>
             <div class="payment-info">
                 <p id="qr-text">Scan the QR code or use the following method</p>
                 <div class="upi-id-content">
-                    <strong id="payment-id">crazydeveloperr@ybl</strong>
+                    <strong id="payment-id">narang07@fam</strong>
                     <button id="payment-button" class="copy-button">Copy</button>
                     <lottie-player 
                         id="upi-animation"
@@ -65,11 +87,9 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const qrImage = document.getElementById("qr-image");
             const paymentId = document.getElementById("payment-id");
             const paymentButton = document.getElementById("payment-button");
 
-            // Function to copy UPI ID
             function copyUpiId() {
                 const tempInput = document.createElement("input");
                 tempInput.value = paymentId.textContent;
@@ -83,13 +103,20 @@
                 }, 2500);
             }
 
-            // Add the copy functionality for UPI
             paymentButton.addEventListener("click", copyUpiId);
 
             document.addEventListener("contextmenu", function (event) {
                 event.preventDefault();
             });
         });
+
+        function hideLoading() {
+            document.getElementById("loading").style.display = "none";
+        }
+
+        function qrLoadError() {
+            document.getElementById("loading").innerHTML = "<p style='color: red;'>Failed to load QR Code</p>";
+        }
 
         (function() {
             const message = String.fromCharCode(77, 97, 100, 101, 32, 119, 105, 116, 104, 32, 128149, 32, 98, 121, 32, 73, 110, 117, 108, 117, 116, 101);
